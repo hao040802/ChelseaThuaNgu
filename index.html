@@ -30,11 +30,18 @@
         }
 
         .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
+            display: flex;
+            flex-direction: row;
             gap: 20px;
             padding: 20px;
             flex: 1;
+        }
+
+        #control-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 30%;
         }
 
         #auto-panel, #manual-panel {
@@ -102,7 +109,7 @@
         }
 
         #map {
-            width: 100%;
+            width: 70%;
             height: 100%;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -130,24 +137,26 @@
 <body>
     <header>Hệ thống quản lý điểm dừng</header>
     <div class="container">
-        <div id="auto-panel">
-            <h3>Chế độ tự động</h3>
-            <label for="modeSelector">Chọn chế độ:</label>
-            <select id="modeSelector">
-                <option value="single">Chọn 1 điểm</option>
-                <option value="multiple">Chọn nhiều điểm</option>
-            </select>
-            <button id="startButton">Bắt đầu</button>
-        </div>
-        <div id="manual-panel">
-            <h3>Chế độ thủ công</h3>
-            <div class="control-buttons">
-                <button id="forwardButton">Tiến</button>
-                <button id="stopButton">Dừng</button>
-                <button id="leftButton">Trái</button>
-                <button id="rightButton">Phải</button>
-                <button id="turnLeftButton">Rẽ Trái</button>
-                <button id="turnRightButton">Rẽ Phải</button>
+        <div id="control-panel">
+            <div id="auto-panel">
+                <h3>Chế độ tự động</h3>
+                <label for="modeSelector">Chọn chế độ:</label>
+                <select id="modeSelector">
+                    <option value="single">Chọn 1 điểm</option>
+                    <option value="multiple">Chọn nhiều điểm</option>
+                </select>
+                <button id="startButton">Bắt đầu</button>
+            </div>
+            <div id="manual-panel">
+                <h3>Chế độ thủ công</h3>
+                <div class="control-buttons">
+                    <button id="forwardButton">Tiến</button>
+                    <button id="stopButton">Dừng</button>
+                    <button id="leftButton">Trái</button>
+                    <button id="rightButton">Phải</button>
+                    <button id="turnLeftButton">Rẽ Trái</button>
+                    <button id="turnRightButton">Rẽ Phải</button>
+                </div>
             </div>
         </div>
         <div id="map"></div>
@@ -254,12 +263,13 @@
                 }
                 currentMarker = L.marker([lat, lng]).addTo(map);
                 currentMarker.bindPopup("<b>Vị trí hiện tại</b><br>Vĩ độ: " + lat + "<br>Kinh độ: " + lng);
-                map.setView([lat, lng], 18.4);
+                                map.setView([lat, lng], 18.4);
             } else {
                 console.error('Vĩ độ hoặc kinh độ không hợp lệ');
             }
         }
-	        function addMarker(lat, lng, name) {
+
+        function addMarker(lat, lng, name) {
             var marker = L.marker([lat, lng]).addTo(map);
             marker.bindPopup("<b>" + name + "</b><br>Nhấn để chọn");
             marker.on('click', function() {
@@ -305,5 +315,3 @@
     </script>
 </body>
 </html>
-
-        
