@@ -285,11 +285,12 @@ function updatePosition(lat, lng) {
         if (currentMarker) {
             map.removeLayer(currentMarker);
         }
-        var currentIcon = L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/sashatran/leaflet-marker-icon/master/img/marker-icon-blue.png', // URL trực tuyến của biểu tượng xe
-            iconSize: [32, 32], // kích thước biểu tượng
-            iconAnchor: [16, 32], // điểm neo biểu tượng (tâm dưới)
-        });
+       var currentIcon = L.icon({
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon-red.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+});
+
         currentMarker = L.marker([lat, lng], { icon: currentIcon }).addTo(map);
         currentMarker.bindPopup("<b>Vị trí hiện tại</b><br>Vĩ độ: " + lat + "<br>Kinh độ: " + lng);
         map.setView([lat, lng], 16);
