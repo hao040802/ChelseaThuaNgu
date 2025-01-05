@@ -279,26 +279,19 @@
         document.getElementById('turnRightButton').onclick = function() {
             controlVehicle("turnRight");
         };
-        // Mã cập nhật vị trí hiện tại trên bản đồ
-function updatePosition(lat, lng) {
-    if (lat && lng) {
-        if (currentMarker) {
-            map.removeLayer(currentMarker);
+        // Mã update vị trí hiện tại trên map
+        function updatePosition(lat, lng) {
+            if (lat && lng) {
+                if (currentMarker) {
+                    map.removeLayer(currentMarker);
+                }
+                currentMarker = L.marker([lat, lng]).addTo(map);
+                currentMarker.bindPopup("<b>Vị trí hiện tại</b><br>Vĩ độ: " + lat + "<br>Kinh độ: " + lng);
+                map.setView([lat, lng], 18.4);
+            } else {
+                console.error('Vĩ độ hoặc kinh độ không hợp lệ');
+            }
         }
-       var currentIcon = L.icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon-red.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-});
-
-        currentMarker = L.marker([lat, lng], { icon: currentIcon }).addTo(map);
-        currentMarker.bindPopup("<b>Vị trí hiện tại</b><br>Vĩ độ: " + lat + "<br>Kinh độ: " + lng);
-        map.setView([lat, lng], 16);
-    } else {
-        console.error('Vĩ độ hoặc kinh độ không hợp lệ');
-    }
-}
-
 // Mã đánh dấu các điểm dừng trên bản đồ
 function addMarker(lat, lng, name) {
     var stopIcon = L.icon({
